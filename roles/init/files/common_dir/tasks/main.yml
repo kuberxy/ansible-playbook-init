@@ -1,0 +1,13 @@
+---
+
+# Common Tasks
+- name: create deploy directories
+  file: path={{ item }} state=directory owner={{ deploy_user }} group={{ deploy_user }}  mode=0755
+  with_items:
+    - "{{ bin_dir }}"
+    - "{{ image_dir }}"
+    - "{{ conf_dir }}"
+    - "{{ log_dir }}"
+    - "{{ script_dir }}"
+    - "{{ data_dir }}"
+    - "{{ backup_dir }}"

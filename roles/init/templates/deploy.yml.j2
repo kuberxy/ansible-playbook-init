@@ -1,0 +1,10 @@
+---
+
+- name: deploy
+  hosts: all
+  gather_facts: false
+  any_errors_fatal: true
+  roles:
+{% for role in project_roles %}
+    - { role: {{ role }} }
+{% endfor %}

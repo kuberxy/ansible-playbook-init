@@ -1,0 +1,37 @@
+---
+
+# ensure docker installed
+- include_role: 
+    name: docker
+
+# ensure python docker module  installed
+- include_role: 
+    name: pip
+
+
+# get images state
+- name: generate images info file without state
+  template: src=images_info.yml.j2 dest={{ local_conf_dir }}/docker_packages_info.yml
+
+- include_vars: file={{ local_conf_dir }}/docker_packages_info.yml
+
+- name: check image tar file exists
+  stat:
+    path:  "{{ local_download_dir }}/{{ item.name }}.tar"
+  with_items: "{{ third_party_images }}"
+  register: "image_tar_st"
+
+- name: generate images state file with state
+  template: src=images_info.yml.j2 dest={{ local_conf_dir }}/docker_packages_info.yml
+
+
+# download image
+- include_vars: file={{ local_conf_dir }}/docker_packages_info.yml
+
+- name: download docker images
+  docker_image:
+    name: "{{ item.repository }}"
+    tag: "{{ item.tag }}"
+    archive_path: "{{ local_download_dir }}/{{ item.name }}.tar"
+  when: has_internal_network and not item.state
+  with_items: "{{ third_party_images   }}"

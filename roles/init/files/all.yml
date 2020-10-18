@@ -1,0 +1,15 @@
+---
+
+# Variables here are applicable to all host groups
+bin_dir: "{{ deploy_dir }}/bin"
+image_dir: "{{ deploy_dir }}/image"
+conf_dir: "{{ deploy_dir }}/conf"
+log_dir: "{{ deploy_dir }}/log"
+script_dir: "{{ deploy_dir }}/script"
+data_dir: "{{ deploy_dir }}/data"
+backup_dir: "{{ deploy_dir }}/backup"
+
+local_download_dir: "{{ playbook_dir }}/download"
+local_resource_dir: "{{ playbook_dir }}/resource"
+local_binary_dir: "{{ playbook_dir }}/resource/bin"
+local_conf_dir: "{{ playbook_dir }}/conf"

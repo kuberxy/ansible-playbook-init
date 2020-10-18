@@ -1,0 +1,12 @@
+---
+
+{{ item[0] }}_user: "{{ '{{' }} deploy_user {{ '}}' }}"
+{{ item[0] }}_conf_dir: "{{ '{{' }} conf_dir {{ '}}' }}"
+
+deployment_method: apt
+configure_method: dynamic
+
+# apt config
+apt_packages:
+  - package_name
+ 

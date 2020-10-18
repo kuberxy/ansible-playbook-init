@@ -1,0 +1,19 @@
+---
+
+# prepare
+- name: create deploy directories
+  file: path={{ '{{' }} item {{ '}}' }} state=directory owner={{ '{{' }} {{ item[0] }}_user {{ '}}' }} group={{ '{{' }} {{ item[0] }}_user {{ '}}' }} mode=0755
+  with_items:
+  - "{{ '{{' }} {{ item[0] }}_conf_dir {{ '}}' }}"
+
+{% raw %}
+# deployment
+- include_tasks: "{{ deployment_method }}_deployment.yml"
+
+# configure
+- include_tasks: "{{ configure_method }}_configure.yml"
+{% endraw %}
+
+- name: backup configuration file
+  command: mv {{ '{{' }} {{ item[0] }}_conf_st.backup_file {{ '}}' }} {{ '{{' }} backup_dir {{ '}}' }}
+  when: {{ item[0] }}_conf_st.changed and {{ item[0] }}_conf_st.backup_file is defined

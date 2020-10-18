@@ -1,0 +1,4 @@
+---
+
+- name: restart {{ item[0] }}
+  systemd: name={{ item[0] }} state=restarted daemon_reload=yes enabled=no

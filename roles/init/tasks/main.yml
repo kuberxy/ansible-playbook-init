@@ -15,66 +15,72 @@
     path: "{{ project_dir }}/roles/{{ item[0] }}/{{ item[1] }}"
     state: directory
   with_nested:
-    - "{{ roles }}"
-    - [ 'defaults', 'files', 'handlers', 'meta', 'tasks', 'templates', 'vars' ]
-  tags:
-    - roles
+    - "{{ project_roles }}"
+    - [ 'defaults', 'files', 'handlers', 'meta', 'tasks', 'templates']
 
-- name: "Create main.yml in directory structure for roles"
-  template:
-      src: "{{ item[1] }}.j2"
-      dest: "{{ project_dir }}/roles/{{ item[0] }}/{{ item[1] }}/main.yml"
-  with_nested:
-    - "{{ roles }}"
-    - [ 'handlers', 'tasks' ]
-  tags:
-    - roles
-
-- name: "Create group_vars/all"
-  template:
-    src: "{{ item }}.j2"
-    dest: "{{ project_dir }}/group_vars/{{ item }}"
+- name: "Create group_vars/all.yml"
+  copy:
+    src: "all.yml"
+    dest: "{{ project_dir }}/group_vars/{{ item }}.yml"
   with_items:
     - all
-  tags:
-    - group_vars
 
 - name: "Create inventory files"
-  template:
-    src: inventory.j2
-    dest: "{{ project_dir }}/{{ item }}"
+  copy:
+    src: inventory.ini
+    dest: "{{ project_dir }}/{{ item }}.ini"
   with_items:
     - production
     - staging
-  tags:
-      - inventory
+    - inventory
 
-- name: "Create role playbooks"
+- name: "Create deploy playbook files"
   template:
-    src: role.j2
+    src: "{{ item }}.yml.j2"
     dest: "{{ project_dir }}/{{ item }}.yml"
   with_items:
-    - "{{ roles }}"
-  tags:
-    - roles
+    - deploy
+    - local_prepare
 
-- name: "Create master playbook"
-  template:
-    src: master.j2
-    dest: "{{ project_dir }}/master.yml"
-  tags:
-    - master
-
-- name: "Register all directories"
-  find:
-    paths: "{{ project_dir }}"
-    file_type: directory
-    recurse: yes
-  register: project_dirs
-
-- name: "Add .gitkeep to all directories"
+- name: "Create run deploy scripts"
   copy:
-    dest: "{{ item.path }}/.gitkeep"
-    content: ''
+    src: "{{ item }}.sh"
+    dest: "{{ project_dir }}/{{ item }}.sh"
+    mode: 0755
   with_items:
-    - "{{ project_dirs.files }}"
+    - deploy
+    - local_prepare
+
+- name: "Create local and common_dir roles"
+  copy:
+    src: "{{ item }}"
+    dest: "{{ project_dir }}/roles/"
+  with_items:
+    - local
+    - common_dir
+
+- name: "Create main.yml in directory structure for roles"
+  template:
+      src: "{{ item[1] }}.yml.j2"
+      dest: "{{ project_dir }}/roles/{{ item[0] }}/{{ item[1] }}/main.yml"
+  with_nested:
+    - "{{ project_roles }}"
+    - [ 'defaults', 'handlers', 'meta', 'tasks']
+
+- name: "Create other task file"
+  template:
+      src: "{{ item[1] }}.yml.j2"
+      dest: "{{ project_dir }}/roles/{{ item[0] }}/tasks/{{ item[1] }}.yml"
+  with_nested:
+    - "{{ project_roles }}"
+    - [ 'apt_deployment', 'dynamic_configure']
+
+- name: "Add ansible config"
+  copy:
+    src: ansible.cfg
+    dest: "{{ project_dir }}/ansible.cfg"
+
+- name: "Add requirements file"
+  copy:
+    src: requirements.txt
+    dest: "{{ project_dir }}/requirements.txt"

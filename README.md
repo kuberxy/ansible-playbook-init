@@ -11,16 +11,16 @@ The playbook sets up the common ansible project structure described in the [ansi
 Use either of the methods below to set up a local directory and file structure ready for `ansible-playbook` use. All that's needed is to modify the inventory, then add tasks, handlers, files and templates.
 
     ansible-playbook \
-    init.yml \
-    -i production \
+    setup.yml \
+    -i inventory.ini \
     --connection=local \
     --extra-vars='{"roles": ["web", "database"], "project_dir": "/tmp/ansible-project"}'
 
 or using a JSON file with variables:
 
     ansible-playbook \
-    init.yml \
-    -i production \
+    setup.yml \
+    -i inventory.ini \
     --connection=local \
     --extra-vars='@project.json'
 

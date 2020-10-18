@@ -1,5 +1,7 @@
 ---
-# ansible-init
+
+# ansible-playbook-init
 - hosts: all
+  gather_facts: false
   roles:
     - { role: init }
