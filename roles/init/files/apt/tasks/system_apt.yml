@@ -1,0 +1,4 @@
+---
+
+- name: create sources config file
+  template: src=system_sources.list.j2 dest={{ apt_conf_dir }}/sources.list owner={{ apt_user }} group={{ apt_user }} mode=0644 backup=yes

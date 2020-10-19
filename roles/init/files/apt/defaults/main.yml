@@ -1,0 +1,30 @@
+---
+
+apt_user: root
+apt_conf_dir: /etc/apt/
+
+# system repo info
+os_repo_url: http://mirrors.aliyun.com/ubuntu/
+os_release: bionic
+
+enable_deb_src: False
+enable_propose: False
+
+# service repo info
+service_infos:
+  - name: docker
+    key_url: https://download.docker.com/linux/ubuntu/gpg
+    repo_type: deb
+    repot_option: '[arch=amd64]'
+    repo_url: https://mirrors.aliyun.com/docker-ce/linux/ubuntu
+    repo_suite: bionic
+    repo_component: stable
+    enable: "{{ docker_enable | default(False) }}"
+  - name: kubernetes
+    key_url: https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg
+    repo_type: deb
+    repot_option:
+    repo_url: https://mirrors.aliyun.com/kubernetes/apt/
+    repo_suite: kubernetes-xenial
+    repo_component: main
+    enable: "{{ kubernetes_enable | default(False) }}"

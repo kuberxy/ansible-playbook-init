@@ -1,0 +1,26 @@
+deb {{ os_repo_url }} {{ os_release}} main restricted universe multiverse
+deb {{ os_repo_url }} {{ os_release}}-updates main restricted universe multiverse
+deb {{ os_repo_url }} {{ os_release}}-backports main restricted universe multiverse
+deb {{ os_repo_url }} {{ os_release}}-security main restricted universe multiverse
+{% if enable_propose %}
+deb {{ os_repo_url }} {{ os_release}}-proposed main restricted universe multiverse
+{% else %}
+#deb {{ os_repo_url }} {{ os_release}}-proposed main restricted universe multiverse
+{% endif %}
+
+{% if enable_deb_src %}
+deb-src {{ os_repo_url }} {{ os_release}} main restricted universe multiverse
+deb-src {{ os_repo_url }} {{ os_release}}-updates main restricted universe multiverse
+deb-src {{ os_repo_url }} {{ os_release}}-backports main restricted universe multiverse
+deb-src {{ os_repo_url }} {{ os_release}}-security main restricted universe multiverse
+{% else %}
+#deb-src {{ os_repo_url }} {{ os_release}} main restricted universe multiverse
+#deb-src {{ os_repo_url }} {{ os_release}}-updates main restricted universe multiverse
+#deb-src {{ os_repo_url }} {{ os_release}}-backports main restricted universe multiverse
+#deb-src {{ os_repo_url }} {{ os_release}}-security main restricted universe multiverse
+{% if enable_propose %}
+deb-src {{ os_repo_url }} {{ os_release}}-proposed main restricted universe multiverse
+{% else %}
+#deb-src {{ os_repo_url }} {{ os_release}}-proposed main restricted universe multiverse
+{% endif %}
+{% endif %}

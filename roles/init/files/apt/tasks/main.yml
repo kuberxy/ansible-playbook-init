@@ -1,0 +1,14 @@
+---
+
+# prepare
+- name: create deploy directories
+  file: path={{ item }} state=directory owner={{ apt_user }} group={{ apt_user }} mode=0755
+  with_items:
+  - "{{ apt_conf_dir }}"
+
+# configure
+- import_tasks: system_apt.yml
+  when: system_apt_enable | default(False)
+
+- import_tasks: service_apt.yml
+  when: service_apt_enable | default(False)

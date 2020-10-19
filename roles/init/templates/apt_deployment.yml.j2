@@ -1,6 +1,13 @@
 ---
-
 {% raw %}
+# ensure service repo exists
+- include_role:
+    name: apt
+  vars:
+  - system_apt_enable: True
+    service_apt_enable: True
+    docker_enable: True
+
 - name: "apt install {{ apt_packages }}"
   apt:
     name: "{{ apt_packages }}"

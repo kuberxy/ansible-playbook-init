@@ -58,6 +58,7 @@
   with_items:
     - local
     - common_dir
+    - apt
 
 - name: "Create main.yml in directory structure for roles"
   template:
