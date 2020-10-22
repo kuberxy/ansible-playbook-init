@@ -7,13 +7,21 @@ local_conf_dir: "{{ playbook_dir }}/conf"
 
 package_type: docker
 
-# image repo url
+# url
 kubernetes_image_repo: "registry.aliyuncs.com/google_containers"
 flannel_image_repo: "quay.io/coreos"
 
-# iamge versions
+dgraph_binary_url: "https://github.com/dgraph-io/dgraph/releases/download/v20.07.0/dgraph-linux-amd64.tar.gz"
+
+redis_binary_url: "http://download.redis.io/releases/redis-5.0.4.tar.gz"
+
+# versions
 etcd_version: 3.3.15-0
 kube_version: v1.16.0
 coredns_version: 1.6.2
 pause_version: 3.1
 flannel_version: v0.12.0-amd64
+
+dgraph_version: 20.07.0
+
+redis_version: 5.0.4
