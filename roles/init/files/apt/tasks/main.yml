@@ -12,3 +12,10 @@
 
 - import_tasks: service_apt.yml
   when: service_apt_enable | default(False)
+
+# install packages
+- name: "apt install {{ apt_packages }}"
+  apt:
+    name: "{{ apt_packages }}"
+    state: present
+    update_cache: yes
