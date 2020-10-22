@@ -1,6 +1,6 @@
 ---
 
-- name: add docker gpg key
+- name: add {{ item.name }} key
   apt_key:
     url: "{{ item.key_url }}"
     state: present
