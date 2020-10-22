@@ -60,6 +60,7 @@
     - common_dir
     - apt
     - pip
+    - systemd
 
 - name: "Create main.yml in directory structure for roles"
   template:
