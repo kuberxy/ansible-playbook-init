@@ -51,7 +51,7 @@
     - deploy
     - local_prepare
 
-- name: "Create local and common_dir roles"
+- name: "Create general roles"
   copy:
     src: "{{ item }}"
     dest: "{{ project_dir }}/roles/"
@@ -59,6 +59,7 @@
     - local
     - common_dir
     - apt
+    - pip
 
 - name: "Create main.yml in directory structure for roles"
   template:

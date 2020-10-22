@@ -1,0 +1,20 @@
+---
+
+# prepare
+- name: create deploy directories
+  file: path={{ item }} state=directory owner={{ pip_user }} group={{ pip_user }} mode=0755
+  with_items:
+  - "{{ pip_conf_dir }}"
+
+# deployment
+- include_tasks: "{{ deployment_method }}_deployment.yml"
+
+# configure
+- include_tasks: "{{ configure_method }}_configure.yml"
+
+# install modules
+- name: "install {{ python_modules }}  module"
+  pip:
+    name: "{{ python_modules }}"
+    state: present
+    executable: pip3

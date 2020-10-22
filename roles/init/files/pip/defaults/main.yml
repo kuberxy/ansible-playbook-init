@@ -1,0 +1,17 @@
+---
+
+pip_conf_dir: /etc/
+pip_user: root
+
+deployment_method: apt
+configure_method: dynamic
+
+# apt config
+apt_packages:
+  - python3-pip
+
+python_modules:
+  - 
+
+pip_index_url: https://mirrors.aliyun.com/pypi/simple/
+pip_trusted_host: mirrors.aliyum.com

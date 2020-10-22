@@ -1,0 +1,4 @@
+---
+
+- name: create pip config file by dynamic
+  template: src=pip.conf.j2 dest={{ pip_conf_dir }}/pip.conf owner={{ pip_user }} group={{ pip_user }} mode=0644 backup=yes
