@@ -3,13 +3,12 @@
 - block:
     - name: restart dnsmasq
       systemd: name=dnsmasq state=restarted
-      when: dnsmasq_addn_hosts_st.changed or dnsmasq_conf_st.changed
+    - name: "check reachability to {{ ns_dest | default('localhost') }}"
+      shell: "nslookup -timeout=1 {{ ns_dest | default('localhost') }} {{ IP }} 1> /dev/null 2> /dev/null; echo $?"
+      register: nslookup_st
+    - name: check reachability result
+      fail: msg="check failed"
+      when: nslookup_st.stdout.strip() != '0'
+  when: dnsmasq_addn_hosts_st.changed or dnsmasq_conf_st.changed
   rescue:
     - include_tasks: "rollback.yml"
-
-- name: "test reachability to {{ ns_dest }}"
-  shell: "nslookup -timeout=1 {{ ns_dest }} {{ IP }} 1> /dev/null 2> /dev/null; echo $?"
-  register: nslookup_st
-
-- name: set nslookup fact
-  set_fact: nslookup_ok={{ nslookup_st.stdout.strip() == '0' }}

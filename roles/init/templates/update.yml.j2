@@ -1,0 +1,18 @@
+{% raw %}
+---
+
+- name: update dnsmasq slave
+  hosts: dnsmasq_node[1]
+  gather_facts: false
+  any_errors_fatal: true
+  roles:
+    - { role: upconf }
+
+- name: deploy dnsmasq master
+  hosts: dnsmasq_node[0]
+  gather_facts: false
+  any_errors_fatal: true
+  roles:
+    - { role: upconf }
+
+{% endraw %}

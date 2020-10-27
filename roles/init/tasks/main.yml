@@ -40,15 +40,17 @@
     dest: "{{ project_dir }}/{{ item }}.yml"
   with_items:
     - deploy
+    - update
     - local_prepare
 
-- name: "Create run deploy scripts"
+- name: "Create run scripts"
   copy:
     src: "{{ item }}.sh"
     dest: "{{ project_dir }}/{{ item }}.sh"
     mode: 0755
   with_items:
     - deploy
+    - update
     - local_prepare
 
 - name: "Create general roles"

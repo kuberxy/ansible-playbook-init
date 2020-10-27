@@ -14,7 +14,3 @@
 
 # check
 - include_tasks: "check.yml"
-
-# rollback
-- include_tasks: "rollback.yml"
-  when: not nslookup_ok

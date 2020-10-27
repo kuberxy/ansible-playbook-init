@@ -10,6 +10,6 @@
 
 - include_tasks: "restart.yml"
 
-- name: exit ansbile
+- name: update result
   fail:
     msg: update dnsmasq failed
