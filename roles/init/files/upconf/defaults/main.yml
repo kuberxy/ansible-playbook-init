@@ -1,0 +1,9 @@
+---
+
+upconf_user: root
+upconf_conf_dir: /etc
+
+dnsmasq_addn_hosts_name: dnsmasq_static_hosts
+dnsmasq_addn_hosts_path: "{{ upconf_conf_dir }}/{{ dnsmasq_addn_hosts_name }}.conf"
+dnsmasq_upstream_server: ['223.5.5.5','223.6.6.6']
+dnsmasq_domain: dev.chian.com

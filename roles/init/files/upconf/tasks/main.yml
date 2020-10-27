@@ -1,0 +1,20 @@
+---
+
+# prepare
+- name: create deploy directories
+  file: path={{ item }} state=directory owner={{ upconf_user }} group={{ upconf_user }} mode=0755
+  with_items:
+  - "{{ upconf_conf_dir }}"
+
+# update
+- include_tasks: "update.yml"
+
+# backup 
+- include_tasks: "backup.yml"
+
+# check
+- include_tasks: "check.yml"
+
+# rollback
+- include_tasks: "rollback.yml"
+  when: not nslookup_ok

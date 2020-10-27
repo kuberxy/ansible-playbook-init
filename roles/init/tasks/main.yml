@@ -61,6 +61,7 @@
     - apt
     - pip
     - systemd
+    - upconf
 
 - name: "Create main.yml in directory structure for roles"
   template:

@@ -1,0 +1,15 @@
+---
+
+- name: rollback dnsmasq addn hosts file
+  command: mv {{ backup_dir }}/{{ dnsmasq_addn_hosts_st.backup_file.split('/')[-1] }} {{ upconf_conf_dir }}/{{ dnsmasq_addn_hosts_name }}.conf
+  when: dnsmasq_addn_hosts_st.changed and dnsmasq_addn_hosts_st.backup_file is defined
+
+- name: rollback configuration file
+  command: mv {{ backup_dir }}/{{ dnsmasq_conf_st.backup_file.split('/')[-1] }} {{ upconf_conf_dir }}/dnsmasq.conf
+  when: dnsmasq_conf_st.changed and dnsmasq_conf_st.backup_file is defined
+
+- include_tasks: "restart.yml"
+
+- name: exit ansbile
+  fail:
+    msg: update dnsmasq failed

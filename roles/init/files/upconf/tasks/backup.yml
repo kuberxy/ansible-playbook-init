@@ -1,0 +1,10 @@
+---
+
+- name: backup dnsmasq addn hosts file
+  command: mv {{ dnsmasq_addn_hosts_st.backup_file }} {{ backup_dir }}
+  when: dnsmasq_addn_hosts_st.changed and dnsmasq_addn_hosts_st.backup_file is defined
+
+- name: backup configuration file
+  command: mv {{ dnsmasq_conf_st.backup_file }} {{ backup_dir }}
+  when: dnsmasq_conf_st.changed and dnsmasq_conf_st.backup_file is defined
+

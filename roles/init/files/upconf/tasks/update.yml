@@ -1,0 +1,9 @@
+---
+
+- name: update dnsmasq addn hosts file
+  template: src={{ dnsmasq_addn_hosts_name }}.conf dest={{ upconf_conf_dir }}/{{ dnsmasq_addn_hosts_name }}.conf owner={{ upconf_user }}  group={{ upconf_user }} mode=0644 backup=yes
+  register: dnsmasq_addn_hosts_st
+
+- name: update configuration file
+  template: src=dnsmasq.conf.j2 dest={{ upconf_conf_dir }}/dnsmasq.conf owner={{ upconf_user }}  group={{ upconf_user }} mode=0644 backup=yes
+  register: dnsmasq_conf_st

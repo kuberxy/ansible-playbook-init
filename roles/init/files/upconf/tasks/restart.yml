@@ -1,0 +1,5 @@
+---
+
+- name: restart dnsmasq
+  systemd: name=dnsmasq state=restarted
+  when: dnsmasq_addn_hosts_st.changed or dnsmasq_conf_st.changed
