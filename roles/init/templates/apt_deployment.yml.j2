@@ -7,10 +7,6 @@
   - system_apt_enable: True
     service_apt_enable: True
     docker_enable: True
-
-- name: "apt install {{ apt_packages }}"
-  apt:
-    name: "{{ apt_packages }}"
-    state: present
-    update_cache: yes
+    apt_packages:
+      - 
 {% endraw %}

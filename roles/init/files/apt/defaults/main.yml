@@ -28,7 +28,3 @@ service_infos:
     repo_suite: kubernetes-xenial
     repo_component: main
     enable: "{{ kubernetes_enable | default(False) }}"
-
-# apt packages
-apt_packages:
-  - 
