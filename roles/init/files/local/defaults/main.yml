@@ -5,7 +5,7 @@ local_resource_dir: "{{ playbook_dir }}/resource"
 local_binary_dir: "{{ playbook_dir }}/resource/bin"
 local_conf_dir: "{{ playbook_dir }}/conf"
 
-package_type: docker
+download_type: package
 
 # url
 kubernetes_image_repo: "registry.aliyuncs.com/google_containers"

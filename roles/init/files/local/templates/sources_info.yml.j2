@@ -1,9 +1,0 @@
----
-
-sources_info:
-  - name: redis
-    url: {{ redis_binary_url }}
-    version: {{ redis_version }}
-{% if source_tar_st is defined %}
-    state: {{ source_tar_st['results'][0].stat.exists | default(false) }}
-{% endif %}

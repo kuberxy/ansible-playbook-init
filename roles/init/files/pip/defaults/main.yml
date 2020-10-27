@@ -10,8 +10,5 @@ configure_method: dynamic
 apt_packages:
   - python3-pip
 
-python_modules:
-  - 
-
 pip_index_url: https://mirrors.aliyun.com/pypi/simple/
 pip_trusted_host: mirrors.aliyum.com

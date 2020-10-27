@@ -4,29 +4,39 @@
 - include_role: 
     name: docker
 
+- include_role:
+    name: apt
+  vars:
+  - system_apt_enable: False
+    service_apt_enable: True
+    docker_enable: True
+    apt_packages:
+      - 'docker-ce=18.06.3~ce~3-0~ubuntu'
+
 # ensure python docker module  installed
 - include_role: 
     name: pip
-
+  vars:
+  - python_modules:
+      - 'docker'
 
 # get images state
 - name: generate images info file without state
-  template: src=images_info.yml.j2 dest={{ local_conf_dir }}/docker_packages_info.yml
+  template: src=images_info.yml.j2 dest={{ local_conf_dir }}/images_info.yml
 
-- include_vars: file={{ local_conf_dir }}/docker_packages_info.yml
+- include_vars: file={{ local_conf_dir }}/images_info.yml
 
 - name: check image tar file exists
   stat:
     path:  "{{ local_download_dir }}/{{ item.name }}.tar"
-  with_items: "{{ third_party_images }}"
+  with_items: "{{ images_info }}"
   register: "image_tar_st"
 
 - name: generate images state file with state
-  template: src=images_info.yml.j2 dest={{ local_conf_dir }}/docker_packages_info.yml
-
+  template: src=images_info.yml.j2 dest={{ local_conf_dir }}/images_info.yml
 
 # download image
-- include_vars: file={{ local_conf_dir }}/docker_packages_info.yml
+- include_vars: file={{ local_conf_dir }}/images_info.yml
 
 - name: download docker images
   docker_image:
@@ -34,4 +44,4 @@
     tag: "{{ item.tag }}"
     archive_path: "{{ local_download_dir }}/{{ item.name }}.tar"
   when: has_internal_network and not item.state
-  with_items: "{{ third_party_images   }}"
+  with_items: "{{ images_info   }}"
