@@ -1,0 +1,6 @@
+---
+
+local_download_dir: "{{ playbook_dir }}/download"
+local_resource_dir: "{{ playbook_dir }}/resource"
+local_binary_dir: "{{ playbook_dir }}/resource/bin"
+local_conf_dir: "{{ playbook_dir }}/conf"

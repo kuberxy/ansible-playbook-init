@@ -59,6 +59,7 @@
     dest: "{{ project_dir }}/roles/"
   with_items:
     - local
+    - download
     - common_dir
     - apt
     - pip

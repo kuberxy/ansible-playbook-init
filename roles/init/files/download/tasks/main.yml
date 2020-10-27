@@ -1,0 +1,42 @@
+---
+
+# prepare
+- name: create downloads and resources directories
+  file: "path={{ item }} state=directory owner={{ deploy_user }} group={{ deploy_user }} mode=0755"
+  with_items:
+  - "{{ local_download_dir }}"
+  - "{{ local_resource_dir }}"
+  - "{{ local_binary_dir }}"
+  - "{{ local_conf_dir }}"
+
+# preflight checks
+## check internal network
+- name: detect internal network
+  shell: >
+    warn=no
+    curl -s --connect-timeout 10 www.baidu.com 2>/dev/null >/dev/null; echo $?
+  changed_when: false
+  register: internal_network_st
+
+- name: set internal network fact
+  set_fact: has_internal_network={{ internal_network_st.stdout.strip() == '0' }}
+
+- name: exit when not has internal network
+  fail:
+    msg: "The Control Machine must have access to the Internet in order to download related packages."
+  when: not has_internal_network
+
+## check external network
+- name: detect external network
+  shell: >
+    warn=no
+    curl -s --connect-timeout 10 google.com 2>/dev/null >/dev/null; echo $?
+  changed_when: false
+  register: external_network_st
+
+- name: set external network fact
+  set_fact: has_external_network={{ external_network_st.stdout.strip() == '0' }}
+
+
+# do actual downloading
+- include_tasks: "download.yml" 

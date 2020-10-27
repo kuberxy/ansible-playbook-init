@@ -2,7 +2,7 @@
 
 # get packages state
 - name: generate packages info file without state
-  template: src=packages_info.yml.j2 dest={{ local_conf_dir }}/packages_info.yml
+  template: src={{ packages_file }} dest={{ local_conf_dir }}/packages_info.yml
 
 - include_vars: file={{ local_conf_dir }}/packages_info.yml
 
@@ -13,7 +13,7 @@
   register: "package_tar_st"
 
 - name: generate packages state file with state
-  template: src=packages_info.yml.j2 dest={{ local_conf_dir }}/packages_info.yml
+  template: src={{ packages_file }} dest={{ local_conf_dir }}/packages_info.yml
 
 
 # download packages
