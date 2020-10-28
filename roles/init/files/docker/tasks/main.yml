@@ -1,0 +1,17 @@
+---
+
+# prepare
+- name: create deploy directories
+  file: path={{ item }} state=directory owner={{ docker_user }} group={{ docker_user }} mode=0755
+  with_items:
+  - "{{ docker_conf_dir }}"
+
+# deployment
+- include_tasks: "{{ deployment_method }}_deployment.yml"
+
+# configure
+- include_tasks: "{{ configure_method }}_configure.yml"
+
+- name: backup configuration file
+  command: mv "{{ docker_conf_st.backup_file }}" "{{ backup_dir }}"
+  when: docker_conf_st.changed and docker_conf_st.backup_file is defined

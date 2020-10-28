@@ -65,6 +65,7 @@
     - pip
     - systemd
     - upconf
+    - docker
 
 - name: "Create main.yml in directory structure for roles"
   template:

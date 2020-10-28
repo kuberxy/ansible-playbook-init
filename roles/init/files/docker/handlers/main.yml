@@ -1,0 +1,5 @@
+---
+# Handlers for docker
+
+- name: restart docker
+  systemd: name=docker state=restarted daemon_reload=yes enabled=yes
