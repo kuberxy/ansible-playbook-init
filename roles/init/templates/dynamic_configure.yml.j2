@@ -1,5 +1,0 @@
----
-
-- name: create configuration file by dynamic
-  template: src={{ item[0] }}.conf.j2 dest={{ '{{' }} {{ item[0] }}_conf_dir {{ '}}' }}/keepalived.conf owner={{ '{{' }} {{ item[0] }}_user {{ '}}' }}  group={{ '{{' }} {{ item[0] }}_user {{ '}}' }} mode=0644 backup=yes
-  register: {{ item[0] }}_conf_st
