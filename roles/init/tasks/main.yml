@@ -81,7 +81,7 @@
       dest: "{{ project_dir }}/roles/{{ item[0] }}/tasks/{{ item[1] }}.yml"
   with_nested:
     - "{{ project_roles }}"
-    - [ 'apt_deployment', 'configure', 'binary_deployment', 'systemd_supervision', 'compile_deployment']
+    - [ 'apt_deployment', 'binary_deployment', 'docker_deployment', 'compile_deployment', 'configure', 'systemd_supervision']
 
 - name: "Add ansible config"
   copy:

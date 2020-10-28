@@ -13,7 +13,3 @@
 # configure
 - include_tasks: "{{ configure_method }}_configure.yml"
 {% endraw %}
-
-- name: backup configuration file
-  command: mv {{ '{{' }} {{ item[0] }}_conf_st.backup_file {{ '}}' }} {{ '{{' }} backup_dir {{ '}}' }}
-  when: {{ item[0] }}_conf_st.changed and {{ item[0] }}_conf_st.backup_file is defined
