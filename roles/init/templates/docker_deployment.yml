@@ -1,0 +1,37 @@
+{% raw %}
+---
+
+# ensure python docker module installed
+- include_role: 
+    name: pip
+  python_modules:
+    - docker
+
+# load images
+- include_vars: file={{ local_conf_dir }}/packages_info.yml
+
+- name: deploy prometheus image
+  copy: "src={{ local_download_dir }}/{{ item }}.tar dest={{ image_dir }}/ owner={{ deploy_user }} group={{ deploy_user }} mode=0755"
+  loop: "{{ image_name }}"
+
+- name: load docker image from archive
+  docker_image:
+    state: present
+    force: yes
+    name: "{{ item.repository }}"
+    tag: "{{ item.tag }}"
+    load_path: "{{ image_dir }}/{{ item.name }}.tar"
+  with_items: "{{ packages_info   }}"
+  when: item.name in image_name
+
+- name: create run script
+  template:
+    src: "run_{{ role_name }}_docker.sh.j2"
+    dest: "{{ script_dir }}/run_{{ role_name }}_{{ prometheus_port }}.sh"
+    owner: "{{ deploy_user }}"
+    group: "{{ deploy_user }}"
+    mode: "0755"
+    backup: yes
+
+- include_tasks: "{{ process_supervision_method }}_supervision.yml"
+{% endraw %}

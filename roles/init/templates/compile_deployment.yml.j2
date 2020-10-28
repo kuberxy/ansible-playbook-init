@@ -1,10 +1,10 @@
 ---
 {% raw %}
-- include_vars: file={{ local_conf_dir }}/sources_packages_info.yml
+- include_vars: file={{ local_conf_dir }}/packages_info.yml
 
 - name: copy source packages
   copy: src={{ local_download_dir }}/{{ item.name }}-{{ item.version }}.tar.gz dest=/tmp owner={{ deploy_user }} group={{ deploy_user }} mode=0755
-  with_items: "{{ sources_info }}"
+  with_items: "{{ packages_info }}"
 
 - name: unarchive source packages
   unarchive:
@@ -12,11 +12,11 @@
     dest: "{{ deploy_dir }}"
     owner: "{{ deploy_user }}"
     group: "{{ deploy_user }}"
-  with_items: "{{ sources_info }}"
+  with_items: "{{ packages_info }}"
 
 - name: make insall redis
   shell: "make && make PREFIX={{ deploy_dir }} install"
   args:
     chdir: "{{ deploy_dir }}/redis-{{ item.version }}"
-  with_items: "{{ sources_info }}"
+  with_items: "{{ packages_info }}"
 {% endraw %}
