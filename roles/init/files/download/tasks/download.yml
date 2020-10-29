@@ -2,27 +2,27 @@
 
 # get packages state
 - name: generate packages info file without state
-  template: src={{ packages_file }} dest={{ local_conf_dir }}/packages_info.yml
+  template: src={{ src_pkgs_file_name }} dest={{ local_conf_dir }}/{{ dest_pkgs_file_name }}
 
-- include_vars: file={{ local_conf_dir }}/packages_info.yml
+- include_vars: file={{ local_conf_dir }}/{{ dest_pkgs_file_name }}
 
 - name: check package tar file exists
   stat:
-    path:  "{{ local_download_dir }}/{{ item.name }}-{{ item.version }}.tar.gz"
+    path:  "{{ local_download_dir }}/{{ item.name }}-{{ item.version }}.{{ pkgs_file_suffix }}"
   with_items: "{{ packages_info }}"
   register: "package_tar_st"
 
 - name: generate packages state file with state
-  template: src={{ packages_file }} dest={{ local_conf_dir }}/packages_info.yml
+  template: src={{ src_pkgs_file_name }} dest={{ local_conf_dir }}/{{ dest_pkgs_file_name }}
 
 
 # download packages
-- include_vars: file={{ local_conf_dir }}/packages_info.yml
+- include_vars: file={{ local_conf_dir }}/{{ dest_pkgs_file_name }}
 
 - name: download package packages
   get_url:
     url: "{{ item.url }}"
-    dest: "{{ local_download_dir }}/{{ item.name }}-{{ item.version }}.tar.gz"
+    dest: "{{ local_download_dir }}/{{ item.name }}-{{ item.version }}.{{ pkgs_file_suffix }}"
     owner: "{{ deploy_user }}"
     group: "{{ deploy_user }}"
     checksum: "{{ item.checksum | default(omit) }}"
