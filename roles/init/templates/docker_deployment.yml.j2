@@ -1,11 +1,12 @@
 {% raw %}
 ---
 
-# ensure python docker module installed
+# ensure python docker module  installed
 - include_role: 
     name: pip
-  python_modules:
-    - docker
+  vars:
+  - python_modules:
+      - 'docker'
 
 # load images
 - include_vars: file={{ local_conf_dir }}/packages_info.yml
