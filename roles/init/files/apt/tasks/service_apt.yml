@@ -1,13 +1,13 @@
 ---
 
-- name: "add {{ item.name }} key"
+- name: "add service key"
   apt_key:
     url: "{{ item.key_url }}"
     state: present
   with_items: "{{ service_infos }}"
   when: item.enable
 
-- name: "add {{ item.name }} repo"
+- name: "add service repo"
   template: src=service_sources.list.j2 dest={{ apt_conf_dir }}/sources.list.d/{{ item.name }}.list owner={{ apt_user }} group={{ apt_user }} mode=0644 backup=yes
   with_items: "{{ service_infos }}"
   when: item.enable
