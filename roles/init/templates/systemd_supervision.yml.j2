@@ -4,6 +4,6 @@
   include_role:
     name: systemd
   vars:
-    this_role_name: {{ item[0] }}_{{ '{{' }} {{ item[0] }}_port {{ '}}' }}
-    service_name: {{ item[0] }}-{{ '{{' }} {{ item[0] }}_port {{ '}}' }}
-
+    this_role_name: "{{ item[0] }}_{{ '{{' }} {{ item[0] }}_port {{ '}}' }}"
+    service_name: "{{ item[0] }}-{{ '{{' }} {{ item[0] }}_port {{ '}}' }}"
+    deployment_method: "{{ '{{' }} deployment_method {{ '}}' }}" 
