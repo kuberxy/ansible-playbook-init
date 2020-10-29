@@ -33,6 +33,8 @@
     group: "{{ deploy_user }}"
     mode: "0755"
     backup: yes
-
+  with_items: "{{ images_info   }}"
+  when: item.name in image_name
+	
 - include_tasks: "{{ process_supervision_method }}_supervision.yml"
 {% endraw %}
