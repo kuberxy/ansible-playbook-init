@@ -10,8 +10,8 @@
 - include_tasks: "{{ deployment_method }}_deployment.yml"
 
 # configure
-- include_tasks: "{{ configure_method }}_configure.yml"
+- include_tasks: "configure.yml"
 
-- name: backup configuration file
-  command: mv "{{ docker_conf_st.backup_file }}" "{{ backup_dir }}"
-  when: docker_conf_st.changed and docker_conf_st.backup_file is defined
+# user
+- name: add deploy user to docker group
+  user: name={{ deploy_user }} groups=docker append=yes
