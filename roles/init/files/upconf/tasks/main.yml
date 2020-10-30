@@ -1,11 +1,5 @@
 ---
 
-# prepare
-- name: create deploy directories
-  file: path={{ item }} state=directory owner={{ upconf_user }} group={{ upconf_user }} mode=0755
-  with_items:
-  - "{{ upconf_conf_dir }}"
-
 # update
 - include_tasks: "update.yml"
 
