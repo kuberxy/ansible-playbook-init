@@ -9,7 +9,7 @@
 - name: unarchive binary packages
   unarchive:
     src: "{{ "{{" }} local_download_dir {{ "}}" }}/{{ "{{" }} item.name {{ "}}" }}-{{ "{{" }} item.version {{ "}}" }}.tar.gz"
-    dest: "{{ "{{" }} deploy_dir {{ "}}" }}"
+    dest: "{{ "{{" }} {{ item[0] }}_bin_dir {{ "}}" }}"
     owner: "{{ "{{" }} deploy_user {{ "}}" }}"
     group: "{{ "{{" }} deploy_user {{ "}}" }}"
   with_items: "{{ "{{" }} packages_info {{ "}}" }}"

@@ -3,6 +3,7 @@
 {{ item[0] }}_port: 80
 
 {{ item[0] }}_user: "{{ '{{' }} deploy_user {{ '}}' }}"
+{{ item[0] }}_bin_dir: "{{ '{{' }} bin_dir {{ '}}' }}"
 {{ item[0] }}_conf_dir: "{{ '{{' }} conf_dir {{ '}}' }}"
 {{ item[0] }}_conf_filename: "{{ item[0] }}-{{ '{{' }} {{ item[0] }}_port {{ '}}' }}"
 {{ item[0] }}_log_dir: "{{ '{{' }} log_dir {{ '}}' }}"
