@@ -4,7 +4,6 @@
 {{ item[0] }}_conf_dir: "{{ '{{' }} conf_dir {{ '}}' }}"
 
 deployment_method: apt
-configure_method: dynamic
 
 # apt config
 apt_packages:
@@ -13,3 +12,7 @@ apt_packages:
 # image config
 image_name:
   - image_name
+
+# binary config
+binary_name:
+  - binary_name
