@@ -1,0 +1,18 @@
+#!/bin/bash
+
+set -e
+ulimit -n 1000000
+
+# WARNING: This file was auto-generated. Do not edit!
+#          All your edit might be overwritten!
+DEPLOY_DIR={{ "{{" }} deploy_dir {{ "}}" }}
+cd "${DEPLOY_DIR}" || exit 1
+
+exec docker run -p {{ "{{" }} {{ item[0] }}_port {{ "}}" }}:9090 --restart=always \
+  -v /etc/localtime:/etc/localtime:ro \
+  -v {{ "{{" }} {{ item[0] }}_conf_dir {{ "}}" }}:/etc/{{ item[0] }} \
+  -v {{ "{{" }} {{ item[0] }}_data_dir {{ "}}" }}:/{{ item[0] }} \
+  -u `id -u {{ "{{" }} {{ item[0] }}_user {{ "}}" }}` \
+  --name={{ item[0] }}-{{ "{{" }} {{ item[0] }}_port {{ "}}" }} \
+  {{ "{{" }} item.repositoryr {{ "}}" }}:{{ "{{" }} item.tag {{ "}}" }} \
+  --config.file=/etc/{{ item[0] }}/{{ "{{" }} {{ item[0] }}_conf_filename {{ "}}" }}

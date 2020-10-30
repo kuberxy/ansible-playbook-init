@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -e
+ulimit -n 1000000
+
+# WARNING: This file was auto-generated. Do not edit!
+#          All your edit might be overwritten!
+DEPLOY_DIR={{ "{{" }} deploy_dir {{ "}}" }}
+cd "${DEPLOY_DIR}" || exit 1
+
+exec > >(tee -i -a "{{ "{{" }} {{ item[0] }}_log_dir {{ "}}" }}/{{ "{{" }} {{ item[0] }}_log_filename {{ "}}" }}
+exec 2>&1
+
+exec bin/{{ item[0] }} \
+  -config.file={{ "{{" }} {{ item[0] }}_conf_dir {{ "}}" }}/{{ "{{" }} {{ item[0] }}__conf_filename {{ "}}" }}

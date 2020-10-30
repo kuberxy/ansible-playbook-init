@@ -83,6 +83,14 @@
     - "{{ project_roles }}"
     - [ 'apt_deployment', 'binary_deployment', 'docker_deployment', 'compile_deployment', 'configure', 'systemd_supervision']
 
+- name: "Create template file"
+  template:
+      src: "run_{{ item[1] }}.sh.j2"
+      dest: "{{ project_dir }}/roles/{{ item[0] }}/templates/run_{{ item[0] }}_{{ item[1] }}.yml"
+  with_nested:
+    - "{{ project_roles }}"
+    - [ 'binary', 'docker']
+
 - name: "Add ansible config"
   copy:
     src: ansible.cfg
