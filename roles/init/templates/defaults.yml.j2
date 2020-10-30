@@ -1,18 +1,30 @@
 ---
 
+{{ item[0] }}_port: 80
+
 {{ item[0] }}_user: "{{ '{{' }} deploy_user {{ '}}' }}"
 {{ item[0] }}_conf_dir: "{{ '{{' }} conf_dir {{ '}}' }}"
+{{ item[0] }}_conf_filename: "{{ item[0] }}-{{ '{{' }} {{ item[0] }}_port {{ '}}' }}"
+{{ item[0] }}_log_dir: "{{ '{{' }} log_dir {{ '}}' }}"
+{{ item[0] }}_log_filename: "{{ item[0] }}-{{ '{{' }} {{ item[0] }}_port {{ '}}' }}"
+{{ item[0] }}_data_dir: "{{ '{{' }} data_dir {{ '}}' }}"
 
-deployment_method: apt
+deployment_method: docker
+process_supervision_method: systemd
+docker_bin_dir: "/usr/bin"
+
+# image config
+image_names:
+  - image_name
 
 # apt config
 apt_packages:
   - package_name
  
-# image config
-image_name:
-  - image_name
+# dpkg config
+dpkg_packages:
+  - package_name
 
 # binary config
-binary_name:
+binary_names:
   - binary_name

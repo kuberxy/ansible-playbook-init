@@ -13,7 +13,7 @@
 
 - name: deploy prometheus image
   copy: "src={{ local_download_dir }}/{{ item }}.tar dest={{ image_dir }}/ owner={{ deploy_user }} group={{ deploy_user }} mode=0755"
-  loop: "{{ image_name }}"
+  loop: "{{ image_names }}"
 
 - name: load docker image from archive
   docker_image:

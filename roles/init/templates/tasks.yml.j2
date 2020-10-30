@@ -5,6 +5,8 @@
   file: path={{ '{{' }} item {{ '}}' }} state=directory owner={{ '{{' }} {{ item[0] }}_user {{ '}}' }} group={{ '{{' }} {{ item[0] }}_user {{ '}}' }} mode=0755
   with_items:
   - "{{ '{{' }} {{ item[0] }}_conf_dir {{ '}}' }}"
+  - "{{ '{{' }} {{ item[0] }}_log_dir {{ '}}' }}"
+  - "{{ '{{' }} {{ item[0] }}_data_dir {{ '}}' }}"
 
 {% raw %}
 # deployment
