@@ -1,36 +1,8 @@
 ---
 
-# get packages state
-- name: generate packages info file without state
-  template: src=packages_info.yml.j2 dest={{ local_conf_dir }}/packages_info.yml
-
-- include_vars: file={{ local_conf_dir }}/packages_info.yml
-
-- name: check package tar file exists
-  stat:
-    path:  "{{ local_download_dir }}/{{ item.name }}-{{ item.version }}.tar.gz"
-  with_items: "{{ packages_info }}"
-  register: "package_tar_st"
-
-- name: generate packages state file with state
-  template: src=packages_info.yml.j2 dest={{ local_conf_dir }}/packages_info.yml
-
-
-# download packages
-- include_vars: file={{ local_conf_dir }}/packages_info.yml
-
-- name: download package packages
-  get_url:
-    url: "{{ item.url }}"
-    dest: "{{ local_download_dir }}/{{ item.name }}-{{ item.version }}.tar.gz"
-    owner: "{{ deploy_user }}"
-    group: "{{ deploy_user }}"
-    checksum: "{{ item.checksum | default(omit) }}"
-    force: yes
-    validate_certs: no
-  register: get_url_result
-  until: "'OK' in get_url_result.msg or 'file already exists' in get_url_result.msg"
-  retries: 4
-  delay: "{{ 5 | random + 3 }}"
-  with_items: "{{ packages_info }}"
-  when: has_internal_network and not item.state
+- import_role: 
+    name: download
+  vars:
+    src_pkgs_file_name: "../templates/packages_info.yml.j2"
+    dest_pkgs_file_name: "packages_info.yml"
+    pkgs_file_suffix: "tar.gz"
