@@ -1,4 +1,3 @@
-{% raw %}
 ---
 
 # ensure python docker module  installed
@@ -9,33 +8,31 @@
       - 'docker'
 
 # load images
-- include_vars: file={{ local_conf_dir }}/images_info.yml
+- include_vars: file={{ "{{" }} local_conf_dir {{ "}}" }}/images_info.yml
 
 - name: deploy prometheus image
-  copy: "src={{ local_download_dir }}/{{ item }}.tar dest={{ image_dir }}/ owner={{ deploy_user }} group={{ deploy_user }} mode=0755"
-  loop: "{{ image_names }}"
+  copy: "src={{ "{{" }} local_download_dir {{ "}}" }}/{{ "{{" }} item {{ "}}" }}.tar dest={{ "{{" }} image_dir {{ "}}" }}/ owner={{ "{{" }} {{ item[0] }}_user {{ "}}" }} group={{ "{{" }} {{ item[0] }}_user {{ "}}" }} mode=0755"
+  loop: "{{ "{{" }} image_names {{ "}}" }}"
 
 - name: load docker image from archive
   docker_image:
     state: present
     force: yes
-    name: "{{ item.repository }}"
-    tag: "{{ item.tag }}"
-    load_path: "{{ image_dir }}/{{ item.name }}.tar"
-  with_items: "{{ images_info }}"
+    name: "{{ "{{" }} item.repository {{ "}}" }}"
+    tag: "{{ "{{" }} item.tag {{ "}}" }}"
+    load_path: "{{ "{{" }} image_dir {{ "}}" }}/{{ "{{" }} item.name {{ "}}" }}.tar"
+  with_items: "{{ "{{" }} images_info {{ "}}" }}"
   when: item.name in image_name
 
 - name: create run script
   template:
-    src: "run_{{ role_name }}_docker.sh.j2"
-    dest: "{{ script_dir }}/run_{{ role_name }}_{{ prometheus_port }}.sh"
-    owner: "{{ deploy_user }}"
-    group: "{{ deploy_user }}"
+    src: "run_{{ "{{" }} role_name {{ "}}" }}_docker.sh.j2"
+    dest: "{{ "{{" }} script_dir {{ "}}" }}/run_{{ "{{" }} role_name {{ "}}" }}_{{ "{{" }} {{ item[0] }}_port {{ "}}" }}.sh"
+    owner: "{{ "{{" }} {{ item[0] }}_user {{ "}}" }}"
+    group: "{{ "{{" }} {{ item[0] }}_user {{ "}}" }}"
     mode: "0755"
     backup: yes
-  with_items: "{{ images_info }}"
+  with_items: "{{ "{{" }} images_info {{ "}}" }}"
   when: item.name in image_name
 
-- include_tasks: "{{ process_supervision_method }}_supervision.yml"
-
-{% endraw %}
+- include_tasks: "{{ "{{" }} process_supervision_method {{ "}}" }}_supervision.yml"
