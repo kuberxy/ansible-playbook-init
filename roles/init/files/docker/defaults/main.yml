@@ -4,12 +4,12 @@ docker_user: root
 docker_conf_dir: /etc/docker/
 
 deployment_method: apt
-configure_method: dynamic
 
 # apt configs
+service_apt_enable: True
+docker_enable: True
 apt_packages:
   - docker-ce=18.06.3~ce~3-0~ubuntu
 
 docker_dns: '["223.5.5.5", "223.6.6.6"]'
 docker_registry_mirrors: '["https://jfb4kjfb.mirror.aliyuncs.com"]'
-
