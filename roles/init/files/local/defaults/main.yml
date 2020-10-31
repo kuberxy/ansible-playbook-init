@@ -5,23 +5,22 @@ local_resource_dir: "{{ playbook_dir }}/resource"
 local_binary_dir: "{{ playbook_dir }}/resource/bin"
 local_conf_dir: "{{ playbook_dir }}/conf"
 
-download_type: package
+download_type: image
 
-# url
-kubernetes_image_repo: "registry.aliyuncs.com/google_containers"
+# urls
 flannel_image_repo: "quay.io/coreos"
-
-dgraph_binary_url: "https://github.com/dgraph-io/dgraph/releases/download/v20.07.0/dgraph-linux-amd64.tar.gz"
-
-redis_binary_url: "http://download.redis.io/releases/redis-5.0.4.tar.gz"
+kubernetes_image_repo: "registry.aliyuncs.com/google_containers"
 
 # versions
+pause_version: 3.1
 etcd_version: 3.3.15-0
 kube_version: v1.16.0
-coredns_version: 1.6.2
-pause_version: 3.1
 flannel_version: v0.12.0-amd64
+coredns_version: 1.6.2
 
-dgraph_version: 20.07.0
-
-redis_version: 5.0.4
+# names
+names:
+  - kube-apiserver
+  - kube-controller-manager
+  - kube-scheduler
+  - kube-proxy
