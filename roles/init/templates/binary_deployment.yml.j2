@@ -2,18 +2,13 @@
 
 - include_vars: file={{ "{{" }} local_conf_dir {{ "}}" }}/packages_info.yml
 
-- name: copy binary packages
-  copy: src={{ "{{" }} local_download_dir {{ "}}" }}/{{ "{{" }} item.name {{ "}}" }}-{{ "{{" }} item.version {{ "}}" }}.tar.gz dest=/tmp owner={{ "{{" }} {{ item[0] }}_user {{ "}}" }} group={{ "{{" }} {{ item[0] }}_user {{ "}}" }} mode=0755
-  loop: "{{ "{{" }} binary_names }}"
-
 - name: unarchive binary packages
   unarchive:
-    src: "{{ "{{" }} local_download_dir {{ "}}" }}/{{ "{{" }} item.name {{ "}}" }}-{{ "{{" }} item.version {{ "}}" }}.tar.gz"
+    src: "{{ "{{" }} local_download_dir {{ "}}" }}/{{ "{{" }} item {{ "}}" }}.tar.gz"
     dest: "{{ "{{" }} {{ item[0] }}_bin_dir {{ "}}" }}"
     owner: "{{ "{{" }} deploy_user {{ "}}" }}"
     group: "{{ "{{" }} deploy_user {{ "}}" }}"
-  with_items: "{{ "{{" }} packages_info {{ "}}" }}"
-  when: item.name in image_name
+  loop: "{{ "{{" }} binary_names {{ "}}" }}"
 
 - name: create run script
   template:
