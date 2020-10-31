@@ -1,13 +1,14 @@
 ---
 
-pip_conf_dir: /etc/
 pip_user: root
+pip_conf_dir: /etc/
 
 deployment_method: apt
-configure_method: dynamic
 
 # apt config
+system_apt_enable: True
 apt_packages:
+  - python-pip
   - python3-pip
 
 pip_index_url: https://mirrors.aliyun.com/pypi/simple/

@@ -1,7 +1,4 @@
 ---
 
-- name: "apt install {{ apt_packages }}"
-  apt:
-    name: "{{ apt_packages }}"
-    state: present
-    update_cache: yes
+- include_role:
+    name: apt

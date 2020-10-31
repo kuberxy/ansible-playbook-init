@@ -10,11 +10,11 @@
 - include_tasks: "{{ deployment_method }}_deployment.yml"
 
 # configure
-- include_tasks: "{{ configure_method }}_configure.yml"
+- include_tasks: "configure.yml"
 
 # install modules
 - name: "install {{ python_modules }}  module"
   pip:
     name: "{{ python_modules }}"
     state: present
-    executable: pip3
+    executable: "{{ pip_version | default('pip3') }}"
