@@ -4,15 +4,6 @@
 - include_role: 
     name: docker
 
-- include_role:
-    name: apt
-  vars:
-  - system_apt_enable: False
-    service_apt_enable: True
-    docker_enable: True
-    apt_packages:
-      - 'docker-ce=18.06.3~ce~3-0~ubuntu'
-
 # ensure python docker module  installed
 - include_role: 
     name: pip
