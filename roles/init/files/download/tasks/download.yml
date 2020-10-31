@@ -8,7 +8,7 @@
 
 - name: check package tar file exists
   stat:
-    path:  "{{ local_download_dir }}/{{ item.name }}-{{ item.version }}.{{ pkgs_file_suffix | default('tar.gz') }}"
+    path:  "{{ local_download_dir }}/{{ item.name }}.{{ pkgs_file_suffix | default('tar.gz') }}"
   with_items: "{{ packages_info }}"
   register: "package_tar_st"
 
@@ -22,7 +22,7 @@
 - name: download package packages
   get_url:
     url: "{{ item.url }}"
-    dest: "{{ local_download_dir }}/{{ item.name }}-{{ item.version }}.{{ pkgs_file_suffix | default('tar.gz') }}"
+    dest: "{{ local_download_dir }}/{{ item.name }}.{{ pkgs_file_suffix | default('tar.gz') }}"
     owner: "{{ deploy_user }}"
     group: "{{ deploy_user }}"
     checksum: "{{ item.checksum | default(omit) }}"
