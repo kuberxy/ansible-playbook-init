@@ -11,3 +11,4 @@
     - "{{ script_dir }}"
     - "{{ data_dir }}"
     - "{{ backup_dir }}"
+    - "{{ status_dir }}"

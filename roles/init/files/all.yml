@@ -8,6 +8,7 @@ log_dir: "{{ deploy_dir }}/log"
 script_dir: "{{ deploy_dir }}/script"
 data_dir: "{{ deploy_dir }}/data"
 backup_dir: "{{ deploy_dir }}/backup"
+status_dir: "{{ deploy_dir }}/status"
 
 local_download_dir: "{{ playbook_dir }}/download"
 local_resource_dir: "{{ playbook_dir }}/resource"
