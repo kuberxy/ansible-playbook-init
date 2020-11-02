@@ -86,7 +86,7 @@
 - name: "Create template file"
   template:
       src: "run_{{ item[1] }}.sh.j2"
-      dest: "{{ project_dir }}/roles/{{ item[0] }}/templates/run_{{ item[0] }}_{{ item[1] }}.yml"
+      dest: "{{ project_dir }}/roles/{{ item[0] }}/templates/run_{{ item[0] }}_{{ item[1] }}.sh.j2"
   with_nested:
     - "{{ project_roles }}"
     - [ 'binary', 'docker']
