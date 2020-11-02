@@ -35,4 +35,4 @@
     tag: "{{ item.tag }}"
     archive_path: "{{ local_download_dir }}/{{ item.name }}.tar"
   when: has_internal_network and not item.state
-  with_items: "{{ images_info   }}"
+  with_items: "{{ images_info }}"

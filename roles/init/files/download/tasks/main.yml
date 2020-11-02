@@ -39,4 +39,4 @@
 
 
 # do actual downloading
-- include_tasks: "download.yml" 
+- include_tasks: "{{ download_type | default('download') }}.yml" 

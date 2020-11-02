@@ -1,8 +1,0 @@
----
-
-- import_role: 
-    name: download
-  vars:
-    src_pkgs_file_name: "../templates/packages_info.yml.j2"
-    dest_pkgs_file_name: "packages_info.yml"
-    pkgs_file_suffix: "tar.gz"
