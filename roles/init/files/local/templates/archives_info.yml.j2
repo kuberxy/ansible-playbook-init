@@ -1,0 +1,17 @@
+---
+
+packages_info:
+  - name: rabbitmq
+    url: {{ rabbitmq_dpkg_url }}
+    version: {{ rabbitmq_version }}
+{% if package_tar_st is defined %}
+    state: {{ package_tar_st['results'][0].stat.exists | default(false) }}
+{% endif %}
+{% for name in names %}
+  - name: {{ name }}
+    url: {{ erlang_dpkg_url }}/{{ name }}_{{ erlang_version }}_amd64.deb
+    version: {{ erlang_version }}
+{% if package_tar_st is defined %}
+    state: {{ package_tar_st['results'][loop.index].stat.exists | default(false) }}
+{% endif %}
+{% endfor %}
