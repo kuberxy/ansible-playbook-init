@@ -18,7 +18,7 @@ IOWriteBandwidthMax={{ IOWriteBandwidthMax }}
 LimitNOFILE=1000000
 #LimitCORE=infinity
 LimitSTACK=10485760
-User={{ deploy_user }}
+User={{ systemd_user }}
 ExecStart={{ script_dir }}/run_{{ this_role_name }}.sh
 {% if restart|default(false) %}
 Restart={{ restart }}
