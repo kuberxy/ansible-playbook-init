@@ -7,4 +7,4 @@
     this_role_name: "{{ item[0] }}_{{ '{{' }} {{ item[0] }}_port {{ '}}' }}"
     service_name: "{{ item[0] }}-{{ '{{' }} {{ item[0] }}_port {{ '}}' }}"
     service_type: "{{ '{{' }} deployment_method {{ '}}' }}" 
-    systemd_user: "{{ deploy_user }}"
+    systemd_user: "{{ '{{' }} {{ deploy_user }} {{ '}}' }}"
