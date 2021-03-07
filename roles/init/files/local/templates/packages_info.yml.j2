@@ -2,14 +2,14 @@
 
 packages_info:
   - name: {{ rabbitmq_dpkg_url.split('/')[-1] }}
-    url: {{ rabbitmq_dpkg_url }}
+    url: {{ rabbitmq_dpkg_url }}.{{ pkgs_file_suffix }}
     version: {{ rabbitmq_version }}
 {% if package_tar_st is defined %}
     state: {{ package_tar_st['results'][0].stat.exists | default(false) }}
 {% endif %}
 {% for name in names %}
   - name: {{ name }}
-    url: {{ erlang_dpkg_url }}/{{ name }}
+    url: {{ erlang_dpkg_url }}/{{ name }}.{{ pkgs_file_suffix }}
     version: {{ erlang_version }}
 {% if package_tar_st is defined %}
     state: {{ package_tar_st['results'][loop.index].stat.exists | default(false) }}
