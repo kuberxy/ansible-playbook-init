@@ -1,11 +1,17 @@
 ---
 
 packages_info:
+  - name: {{ rabbitmq_dpkg_url.split('/')[-1] }}
+    url: {{ rabbitmq_dpkg_url }}
+    version: {{ rabbitmq_version }}
+{% if package_tar_st is defined %}
+    state: {{ package_tar_st['results'][0].stat.exists | default(false) }}
+{% endif %}
 {% for name in names %}
-  - name: {{ name.split('_', 1)[0] }}
-    url: {{ nginx_url }}/{{ name }}
-    version: {{ nginx_version }}
-{% if package_file_st is defined %}
-    state: {{ package_file_st['results'][loop.index0].stat.exists | default(false) }}
+  - name: {{ name }}
+    url: {{ erlang_dpkg_url }}/{{ name }}
+    version: {{ erlang_version }}
+{% if package_tar_st is defined %}
+    state: {{ package_tar_st['results'][loop.index].stat.exists | default(false) }}
 {% endif %}
 {% endfor %}
