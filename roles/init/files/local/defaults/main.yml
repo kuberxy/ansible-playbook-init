@@ -6,10 +6,11 @@ local_binary_dir: "{{ playbook_dir }}/resource/bin"
 local_conf_dir: "{{ playbook_dir }}/conf"
 
 download_type: package
+pkgs_file_suffix: "deb"
 
 # urls
-rabbitmq_dpkg_url: "https://mirrors.huaweicloud.com/rabbitmq-server/v3.7.26/rabbitmq-server_3.7.26-1_all.deb"
-erlang_dpkg_url: "https://dl.bintray.com/rabbitmq-erlang/debian/pool/erlang/21.3.8.18-1/ubuntu/bionic/"
+rabbitmq_dpkg_url: "https://mirrors.huaweicloud.com/rabbitmq-server/v3.7.26/rabbitmq-server_3.7.26-1_all"
+erlang_dpkg_url: "https://dl.bintray.com/rabbitmq-erlang/debian/pool/erlang/21.3.8.18-1/ubuntu/bionic"
 
 # versions
 rabbitmq_version: 3.7.26-1
@@ -17,20 +18,20 @@ erlang_version: 21.3.8.18-1
 
 # names
 names:
-  - erlang-base_21.3.8.18-1_amd64.deb
-  - erlang-asn1_21.3.8.18-1_amd64.deb
-  - erlang-crypto_21.3.8.18-1_amd64.deb
-  - erlang-eldap_21.3.8.18-1_amd64.deb
-  - erlang-ftp_21.3.8.18-1_amd64.deb
-  - erlang-inets_21.3.8.18-1_amd64.deb
-  - erlang-mnesia_21.3.8.18-1_amd64.deb
-  - erlang-os-mon_21.3.8.18-1_amd64.deb
-  - erlang-parsetools_21.3.8.18-1_amd64.deb
-  - erlang-public-key_21.3.8.18-1_amd64.deb
-  - erlang-runtime-tools_21.3.8.18-1_amd64.deb
-  - erlang-snmp_21.3.8.18-1_amd64.deb
-  - erlang-ssl_21.3.8.18-1_amd64.deb
-  - erlang-syntax-tools_21.3.8.18-1_amd64.deb
-  - erlang-tftp_21.3.8.18-1_amd64.deb
-  - erlang-tools_21.3.8.18-1_amd64.deb
-  - erlang-xmerl_21.3.8.18-1_amd64.deb
+  - erlang-base_21.3.8.18-1_amd64
+  - erlang-asn1_21.3.8.18-1_amd64
+  - erlang-crypto_21.3.8.18-1_amd64
+  - erlang-eldap_21.3.8.18-1_amd64
+  - erlang-ftp_21.3.8.18-1_amd64
+  - erlang-inets_21.3.8.18-1_amd64
+  - erlang-mnesia_21.3.8.18-1_amd64
+  - erlang-os-mon_21.3.8.18-1_amd64
+  - erlang-parsetools_21.3.8.18-1_amd64
+  - erlang-public-key_21.3.8.18-1_amd64
+  - erlang-runtime-tools_21.3.8.18-1_amd64
+  - erlang-snmp_21.3.8.18-1_amd64
+  - erlang-ssl_21.3.8.18-1_amd64
+  - erlang-syntax-tools_21.3.8.18-1_amd64
+  - erlang-tftp_21.3.8.18-1_amd64
+  - erlang-tools_21.3.8.18-1_amd64
+  - erlang-xmerl_21.3.8.18-1_amd64
