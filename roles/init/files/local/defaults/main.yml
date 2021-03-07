@@ -5,22 +5,21 @@ local_resource_dir: "{{ playbook_dir }}/resource"
 local_binary_dir: "{{ playbook_dir }}/resource/bin"
 local_conf_dir: "{{ playbook_dir }}/conf"
 
-download_type: image
+download_type: package
 
 # urls
-flannel_image_repo: "quay.io/coreos"
-kubernetes_image_repo: "registry.aliyuncs.com/google_containers"
+nginx_package_url: "http://mirrors.aliyun.com/ubuntu/pool/main/n/nginx/"
 
 # versions
-pause_version: 3.1
-etcd_version: 3.3.15-0
-kube_version: v1.16.0
-flannel_version: v0.12.0-amd64
-coredns_version: 1.6.2
+nginx_version: 1.14.0
 
 # names
 names:
-  - kube-apiserver
-  - kube-controller-manager
-  - kube-scheduler
-  - kube-proxy
+  - nginx_1.14.0-0ubuntu1_all.deb
+  - nginx-common_1.14.0-0ubuntu1_all.deb
+  - nginx-core_1.14.0-0ubuntu1_amd64.deb
+  - libnginx-mod-stream_1.14.0-0ubuntu1_amd64.deb
+  - libnginx-mod-mail_1.14.0-0ubuntu1_amd64.deb
+  - libnginx-mod-http-xslt-filter_1.14.0-0ubuntu1_amd64.deb
+  - libnginx-mod-http-image-filter_1.14.0-0ubuntu1_amd64.deb
+  - libnginx-mod-http-geoip_1.14.0-0ubuntu1_amd64.deb
