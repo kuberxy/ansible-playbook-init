@@ -1,31 +1,11 @@
 ---
 
 packages_info:
-  - name: {{ jdk_name.split('_', 1)[0] }}
-    url: {{ jdk_dpkg_url }}/{{ jdk_name }}
-    version: {{ jdk_version }}
-{% if package_file_st is defined %}
-    state: {{ package_file_st['results'][0].stat.exists | default(false) }}
-{% endif %}
-  - name: {{ libmysql_java_name.split('_', 1)[0] }}
-    url: {{ libmysql_java_dpkg_url }}/{{ libmysql_java_name }}
-    version: {{ libmysql_java_version }}
-{% if package_file_st is defined %}
-    state: {{ package_file_st['results'][1].stat.exists | default(false) }}
-{% endif %}
-{% for name in mysql_names %}
+{% for name in names %}
   - name: {{ name.split('_', 1)[0] }}
-    url: {{ mysql_dpkg_url }}/{{ name }}
-    version: {{ mysql_version }}
+    url: {{ nginx_url }}/{{ name }}
+    version: {{ nginx_version }}
 {% if package_file_st is defined %}
-    state: {{ package_file_st['results'][loop.index0 + 2].stat.exists | default(false) }}
-{% endif %}
-{% endfor %}
-{% for name in cloudera_names %}
-  - name: {{ name.split('_', 1)[0] }}
-    url: {{ cloudera_dpkg_url }}/{{ name }}
-    version: {{ cloudera_version }}
-{% if package_file_st is defined %}
-    state: {{ package_file_st['results'][loop.index0 + 7].stat.exists | default(false) }}
+    state: {{ package_file_st['results'][loop.index0].stat.exists | default(false) }}
 {% endif %}
 {% endfor %}
