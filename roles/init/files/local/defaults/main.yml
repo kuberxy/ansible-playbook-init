@@ -8,18 +8,29 @@ local_conf_dir: "{{ playbook_dir }}/conf"
 download_type: package
 
 # urls
-nginx_package_url: "http://mirrors.aliyun.com/ubuntu/pool/main/n/nginx/"
+rabbitmq_dpkg_url: "https://mirrors.huaweicloud.com/rabbitmq-server/v3.7.26/rabbitmq-server_3.7.26-1_all.deb"
+erlang_dpkg_url: "https://dl.bintray.com/rabbitmq-erlang/debian/pool/erlang/21.3.8.18-1/ubuntu/bionic/"
 
 # versions
-nginx_version: 1.14.0
+rabbitmq_version: 3.7.26-1
+erlang_version: 21.3.8.18-1
 
 # names
 names:
-  - nginx_1.14.0-0ubuntu1_all.deb
-  - nginx-common_1.14.0-0ubuntu1_all.deb
-  - nginx-core_1.14.0-0ubuntu1_amd64.deb
-  - libnginx-mod-stream_1.14.0-0ubuntu1_amd64.deb
-  - libnginx-mod-mail_1.14.0-0ubuntu1_amd64.deb
-  - libnginx-mod-http-xslt-filter_1.14.0-0ubuntu1_amd64.deb
-  - libnginx-mod-http-image-filter_1.14.0-0ubuntu1_amd64.deb
-  - libnginx-mod-http-geoip_1.14.0-0ubuntu1_amd64.deb
+  - erlang-base_21.3.8.18-1_amd64.deb
+  - erlang-asn1_21.3.8.18-1_amd64.deb
+  - erlang-crypto_21.3.8.18-1_amd64.deb
+  - erlang-eldap_21.3.8.18-1_amd64.deb
+  - erlang-ftp_21.3.8.18-1_amd64.deb
+  - erlang-inets_21.3.8.18-1_amd64.deb
+  - erlang-mnesia_21.3.8.18-1_amd64.deb
+  - erlang-os-mon_21.3.8.18-1_amd64.deb
+  - erlang-parsetools_21.3.8.18-1_amd64.deb
+  - erlang-public-key_21.3.8.18-1_amd64.deb
+  - erlang-runtime-tools_21.3.8.18-1_amd64.deb
+  - erlang-snmp_21.3.8.18-1_amd64.deb
+  - erlang-ssl_21.3.8.18-1_amd64.deb
+  - erlang-syntax-tools_21.3.8.18-1_amd64.deb
+  - erlang-tftp_21.3.8.18-1_amd64.deb
+  - erlang-tools_21.3.8.18-1_amd64.deb
+  - erlang-xmerl_21.3.8.18-1_amd64.deb
