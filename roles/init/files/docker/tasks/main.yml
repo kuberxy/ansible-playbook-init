@@ -12,6 +12,10 @@
 # configure
 - include_tasks: "configure.yml"
 
+# restart
+- name: restart docker
+  systemd: name=docker state=restarted daemon_reload=yes enabled=yes
+
 # user
 - name: add deploy user to docker group
   user: name={{ deploy_user }} groups=docker append=yes

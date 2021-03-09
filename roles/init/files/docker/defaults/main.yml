@@ -2,6 +2,7 @@
 
 docker_user: root
 docker_conf_dir: /etc/docker/
+docker_conf_filename: daemon.json
 
 deployment_method: apt
 
@@ -11,5 +12,7 @@ docker_enable: True
 apt_packages:
   - docker-ce=18.06.3~ce~3-0~ubuntu
 
-docker_dns: '["223.5.5.5", "223.6.6.6"]'
-docker_registry_mirrors: '["https://jfb4kjfb.mirror.aliyuncs.com"]'
+# docker config
+dns: "{{ docker_dns }}"
+registry_mirrors: "{{ docker_registry_mirrors }}"
+insecure_registries: "{{ docker_insecure_registries | default(False) }}"

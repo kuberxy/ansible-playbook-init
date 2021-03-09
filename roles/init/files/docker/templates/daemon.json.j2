@@ -1,5 +1,22 @@
+{%- set dns_list = [] -%}
+{%- for host in dns -%}
+  {%- set _ = dns_list.append(host) -%}
+{%- endfor -%}
+
+{%- set mirrors_list = [] -%}
+{%- for host in registry_mirrors -%}
+  {%- set _ = mirrors_list.append(host) -%}
+{%- endfor -%}
+
 {
   "exec-opts": ["native.cgroupdriver=systemd"],
-  "dns": {{ docker_dns }},
-  "registry-mirrors": {{ docker_registry_mirrors }}
+  "dns": {{ dns_list }},
+{% if insecure_registries %}
+{%- set registry_list = [] -%}
+{%- for host in insecure_registries -%}
+  {%- set _ = registry_list.append(host) -%}
+{%- endfor -%}
+  "insecure-registries": {{ registry_list }},
+{% endif %}
+  "registry-mirrors": {{ mirrors_list }}
 }

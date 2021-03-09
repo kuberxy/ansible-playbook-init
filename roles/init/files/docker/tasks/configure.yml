@@ -1,6 +1,5 @@
 ---
 
 - name: create configuration file
-  template: src=daemon.json.j2 dest={{ docker_conf_dir }}/daemon.json owner={{ docker_user }} group={{ docker_user }} mode=0644 backup=yes
-  register: docker_conf_st
-  notify: restart docker
+  copy: content={{ lookup('template', 'daemon.json.j2') | to_json }} dest={{ docker_conf_dir }}/{{ docker_conf_filename }} owner={{ docker_user }} group={{ docker_user }} mode=0644 backup=yes
+  # template: src=daemon.json.j2 dest={{ docker_conf_dir }}/{{ docker_conf_filename }} owner={{ docker_user }} group={{ docker_user }} mode=0644 backup=yes
